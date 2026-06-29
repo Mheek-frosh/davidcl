@@ -1,0 +1,61 @@
+.sticky-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px; /* Small width */
+  background-color: #fff;
+  color: #000;
+  transform: translateX(120%); /* Hide to the right initially */
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+}
+
+.sticky-popup.visible {
+  transform: translateX(0); /* Slide in from right */
+}
+
+.sticky-popup-content {
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.sticky-image {
+  width: 50px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.sticky-title {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.sticky-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sticky-btn {
+  background-color: #000;
+  color: #fff;
+  padding: 8px 12px;
+  font-size: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sticky-btn:hover {
+  background-color: #333;
+}

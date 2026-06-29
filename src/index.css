@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
-  --bg-color: #000000;
-  --text-color: #ffffff;
-  --accent-color: #333333;
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --accent-color: #cccccc;
   --font-family: 'Inter', Helvetica, Arial, sans-serif;
-  --header-bg: rgba(0, 0, 0, 0.9);
-  --btn-bg: #ffffff;
-  --btn-text: #000000;
-  --btn-hover-bg: #cccccc;
+  --header-bg: rgba(255, 255, 255, 0.9);
+  --btn-bg: #000000;
+  --btn-text: #ffffff;
+  --btn-hover-bg: #333333;
 }
 
 * {

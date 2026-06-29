@@ -1,0 +1,186 @@
+.product-view-container {
+  padding-top: 120px;
+  padding-bottom: 60px;
+}
+
+.product-view-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+}
+
+@media (min-width: 768px) {
+  .product-view-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+}
+
+.main-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.thumbnail-list {
+  display: flex;
+  gap: 10px;
+}
+
+.thumbnail {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.thumbnail.active {
+  opacity: 1;
+  border: 1px solid var(--text-color);
+}
+
+.product-view-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.product-view-price {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.size-selector {
+  margin-bottom: 30px;
+}
+
+.size-label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.size-options {
+  display: flex;
+  gap: 10px;
+}
+
+.size-btn {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  color: #a0a0a0;
+  border: 1px solid transparent;
+  font-size: 14px;
+}
+
+/* For dark mode inversion if needed, but the ref image is white bg. We'll stick to dark theme style but mimic the button structure */
+.size-btn {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  border: 1px solid #333;
+  padding: 15px;
+  margin-bottom: 40px;
+}
+
+.accordions {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 40px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.accordion-icon {
+  font-size: 18px;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.accordion-content.open {
+  max-height: 300px;
+  padding-bottom: 15px;
+}
+
+.accordion-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #a0a0a0;
+  font-size: 13px;
+  line-height: 2;
+}
+
+.accordion-content p {
+  color: #a0a0a0;
+  font-size: 13px;
+}
+
+.fit-guide {
+  margin-bottom: 40px;
+}
+
+.fit-label {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.fit-segments {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.fit-segment {
+  height: 2px;
+  flex: 1;
+  background-color: #333;
+}
+
+.fit-segment.active {
+  background-color: #fff;
+}
+
+.fit-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #a0a0a0;
+}
+
+.you-may-also-like {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.related-title {
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  margin-bottom: 40px;
+}

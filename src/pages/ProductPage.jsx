@@ -1,8 +1,8 @@
 import React from 'react';
-import ProductCard from '../ProductCard/ProductCard';
-import './ProductGrid.css';
+import { useParams } from 'react-router-dom';
+import ProductView from '../components/ProductView/ProductView';
 
-const products = [
+const mockProducts = [
   {
     id: 1,
     title: 'DP® MOTO JACKET',
@@ -29,17 +29,16 @@ const products = [
   }
 ];
 
-const ProductGrid = ({ hideTitle }) => {
+const ProductPage = () => {
+  const { id } = useParams();
+  // Find product or default to first if not found (for demo)
+  const product = mockProducts.find(p => p.id === parseInt(id)) || mockProducts[0];
+
   return (
-    <section className="product-section container">
-      {!hideTitle && <h2 className="section-title">New Arrivals</h2>}
-      <div className="product-grid">
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </section>
+    <div>
+      <ProductView product={product} />
+    </div>
   );
 };
 
-export default ProductGrid;
+export default ProductPage;
