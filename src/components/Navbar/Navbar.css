@@ -6,16 +6,17 @@
   background-color: var(--header-bg);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80px;
+  height: 70px;
 }
 
+/* Desktop nav links */
 .navbar-links {
   display: flex;
   gap: 30px;
@@ -35,19 +36,22 @@
   color: var(--text-color);
 }
 
+/* Logo */
 .navbar-logo {
   flex: 1;
   text-align: center;
 }
 
 .navbar-logo a {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-color);
+  white-space: nowrap;
 }
 
+/* Icons group */
 .navbar-icons {
   display: flex;
   gap: 20px;
@@ -56,7 +60,8 @@
   align-items: center;
 }
 
-.icon-btn, .icon-text-link {
+.icon-btn,
+.icon-text-link {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -67,9 +72,14 @@
   font-weight: 600;
   transition: opacity 0.3s ease, transform 0.3s ease;
   text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
 }
 
-.icon-btn:hover, .icon-text-link:hover {
+.icon-btn:hover,
+.icon-text-link:hover {
   opacity: 0.7;
 }
 
@@ -77,11 +87,155 @@
   transform: scale(1.05);
 }
 
+/* Cart badge */
+.cart-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 1.5px solid #fff;
+}
+
+/* Hamburger — hidden on desktop */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 1100;
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--text-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-line.open:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-line.open:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile slide-down menu */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0,0,0,0.08);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+
+.mobile-menu.open {
+  max-height: 400px;
+  padding-bottom: 16px;
+}
+
+.mobile-nav-link {
+  display: block;
+  padding: 14px 20px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--text-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav-link:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+/* ===== MOBILE BREAKPOINT ===== */
 @media (max-width: 768px) {
   .navbar-links {
     display: none;
   }
+
+  .hamburger-btn {
+    display: flex;
+    flex: 0;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .navbar-logo {
+    text-align: center;
+    flex: 1;
+  }
+
   .navbar-logo a {
-    font-size: 18px;
+    font-size: 16px;
+    letter-spacing: 0.12em;
+  }
+
+  .icon-text {
+    display: none;
+  }
+
+  .icon-text-link .icon-text {
+    display: none;
+  }
+
+  /* Hide Account link text on mobile — the icon buttons remain */
+  .icon-text-link {
+    display: none;
+  }
+
+  .navbar-icons {
+    gap: 14px;
+  }
+
+  .navbar-container {
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-logo a {
+    font-size: 13px;
+    letter-spacing: 0.08em;
   }
 }

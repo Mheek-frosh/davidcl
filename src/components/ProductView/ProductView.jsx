@@ -3,9 +3,12 @@ import './ProductView.css';
 import StickyPopup from '../StickyPopup/StickyPopup';
 import ProductGrid from '../ProductGrid/ProductGrid';
 
-const ProductView = ({ product }) => {
+const ProductView = ({ product, addToCart }) => {
   const [activeAccordion, setActiveAccordion] = useState(null);
   const [showSticky, setShowSticky] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [added, setAdded] = useState(false);
+  const [sizeError, setSizeError] = useState(false);
 
   const toggleAccordion = (index) => {
     setActiveAccordion(activeAccordion === index ? null : index);
@@ -13,17 +16,29 @@ const ProductView = ({ product }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show sticky popup when scrolled past a certain point (e.g., 600px)
-      if (window.scrollY > 600) {
-        setShowSticky(true);
-      } else {
-        setShowSticky(false);
-      }
+      setShowSticky(window.scrollY > 600);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Reset state when product changes
+  useEffect(() => {
+    setSelectedSize(null);
+    setAdded(false);
+    setSizeError(false);
+  }, [product.id]);
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      setSizeError(true);
+      setTimeout(() => setSizeError(false), 2000);
+      return;
+    }
+    addToCart(product, selectedSize);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2500);
+  };
 
   return (
     <div className="product-view-container container">
@@ -41,25 +56,39 @@ const ProductView = ({ product }) => {
           <p className="product-view-price">${product.price}</p>
 
           <div className="size-selector">
-            <p className="size-label">Size</p>
+            <p className="size-label">
+              Size
+              {sizeError && <span className="size-error"> — Please select a size</span>}
+            </p>
             <div className="size-options">
               {['28', '30', '32', '34', '36'].map(size => (
-                <button key={size} className="size-btn">{size}</button>
+                <button
+                  key={size}
+                  className={`size-btn ${selectedSize === size ? 'selected' : ''}`}
+                  onClick={() => { setSelectedSize(size); setSizeError(false); }}
+                >
+                  {size}
+                </button>
               ))}
             </div>
           </div>
 
-          <button className="btn add-to-cart-btn">ADD TO CART</button>
+          <button
+            className={`btn add-to-cart-btn ${added ? 'added' : ''} ${sizeError ? 'error' : ''}`}
+            onClick={handleAddToCart}
+          >
+            {added ? '✓ ADDED TO CART' : sizeError ? 'SELECT A SIZE' : 'ADD TO CART'}
+          </button>
 
           <div className="accordions">
             <div className="accordion-item">
               <button className="accordion-header" onClick={() => toggleAccordion(0)}>
                 PRODUCT DESCRIPTION
-                <span className="accordion-icon">{activeAccordion === 0 ? '-' : '+'}</span>
+                <span className="accordion-icon">{activeAccordion === 0 ? '−' : '+'}</span>
               </button>
               <div className={`accordion-content ${activeAccordion === 0 ? 'open' : ''}`}>
                 <ul>
-                  <li>CUT & SEWN</li>
+                  <li>CUT &amp; SEWN</li>
                   <li>HEAVYWEIGHT 16 OZ COTTON</li>
                   <li>490 GSM</li>
                   <li>HAND-PAINTED SILVER WASH</li>
@@ -72,7 +101,7 @@ const ProductView = ({ product }) => {
             <div className="accordion-item">
               <button className="accordion-header" onClick={() => toggleAccordion(1)}>
                 SIZE CHART
-                <span className="accordion-icon">{activeAccordion === 1 ? '-' : '+'}</span>
+                <span className="accordion-icon">{activeAccordion === 1 ? '−' : '+'}</span>
               </button>
               <div className={`accordion-content ${activeAccordion === 1 ? 'open' : ''}`}>
                 <p>Size chart details here.</p>
@@ -80,8 +109,8 @@ const ProductView = ({ product }) => {
             </div>
             <div className="accordion-item">
               <button className="accordion-header" onClick={() => toggleAccordion(2)}>
-                SHIPPING & RETURNS
-                <span className="accordion-icon">{activeAccordion === 2 ? '-' : '+'}</span>
+                SHIPPING &amp; RETURNS
+                <span className="accordion-icon">{activeAccordion === 2 ? '−' : '+'}</span>
               </button>
               <div className={`accordion-content ${activeAccordion === 2 ? 'open' : ''}`}>
                 <p>Shipping details here.</p>
@@ -112,7 +141,7 @@ const ProductView = ({ product }) => {
         <ProductGrid hideTitle={true} />
       </div>
 
-      <StickyPopup product={product} isVisible={showSticky} />
+      <StickyPopup product={product} isVisible={showSticky} onAddToCart={handleAddToCart} />
     </div>
   );
 };

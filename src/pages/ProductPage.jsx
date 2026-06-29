@@ -29,14 +29,13 @@ const mockProducts = [
   }
 ];
 
-const ProductPage = () => {
+const ProductPage = ({ addToCart }) => {
   const { id } = useParams();
-  // Find product or default to first if not found (for demo)
   const product = mockProducts.find(p => p.id === parseInt(id)) || mockProducts[0];
 
   return (
     <div>
-      <ProductView product={product} />
+      <ProductView product={product} addToCart={addToCart} />
     </div>
   );
 };
