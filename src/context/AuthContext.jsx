@@ -25,7 +25,10 @@ const DUMMY_USERS = [
 ];
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem('davidcl_user');
+    return saved ? JSON.parse(saved) : null;
+  });
   const [error, setError] = useState('');
 
   const signIn = (email, password) => {
@@ -36,6 +39,7 @@ export const AuthProvider = ({ children }) => {
     if (found) {
       const { password: _, ...safeUser } = found;
       setUser(safeUser);
+      localStorage.setItem('davidcl_user', JSON.stringify(safeUser));
       return { success: true };
     }
     setError('Invalid email or password.');
@@ -66,12 +70,14 @@ export const AuthProvider = ({ children }) => {
       orders: 0,
     };
     setUser(newUser);
+    localStorage.setItem('davidcl_user', JSON.stringify(newUser));
     return { success: true };
   };
 
   const signOut = () => {
     setUser(null);
     setError('');
+    localStorage.removeItem('davidcl_user');
   };
 
   return (

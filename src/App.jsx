@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import SearchOverlay from './components/SearchOverlay/SearchOverlay';
@@ -14,12 +14,29 @@ import './index.css';
 function App() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const { pathname } = useLocation();
+  const [cartItems, setCartItems] = useState(() => {
+    const saved = localStorage.getItem('davidcl_cart');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      // Small timeout to ensure the DOM is rendered before scrolling
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
+
+  useEffect(() => {
+    localStorage.setItem('davidcl_cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (product, size) => {
     setCartItems(prev => {
@@ -74,6 +91,7 @@ function App() {
           <Route path="/product/:id" element={<ProductPage addToCart={addToCart} />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />
