@@ -6,6 +6,8 @@ import SearchOverlay from './components/SearchOverlay/SearchOverlay';
 import CartDrawer from './components/CartDrawer/CartDrawer';
 import Home from './pages/Home';
 import ProductPage from './pages/ProductPage';
+import SignIn from './pages/SignIn';
+import CreateAccount from './pages/CreateAccount';
 import TopBar from './components/TopBar/TopBar';
 import './index.css';
 
@@ -70,6 +72,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductPage addToCart={addToCart} />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/create-account" element={<CreateAccount />} />
         </Routes>
       </main>
       <Footer />
