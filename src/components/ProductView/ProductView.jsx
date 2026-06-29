@@ -49,7 +49,7 @@ const ProductView = ({ product }) => {
             </div>
           </div>
 
-          <button className="btn add-to-cart-btn">SOLD OUT</button>
+          <button className="btn add-to-cart-btn">ADD TO CART</button>
 
           <div className="accordions">
             <div className="accordion-item">
