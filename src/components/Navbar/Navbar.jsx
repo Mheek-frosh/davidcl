@@ -33,7 +33,7 @@ const Navbar = ({ onSearchClick, onCartClick, cartCount }) => {
         {/* Desktop Links */}
         <div className="navbar-links">
           <Link to="/#shop" className="nav-link">Shop</Link>
-          <Link to="/#collections" className="nav-link">Collections</Link>
+          <Link to="/collections" className="nav-link">Collections</Link>
         </div>
 
         {/* Hamburger — mobile only */}
@@ -158,7 +158,7 @@ const Navbar = ({ onSearchClick, onCartClick, cartCount }) => {
       <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
         <Link to="/" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Home</Link>
         <Link to="/#shop" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Shop</Link>
-        <Link to="/#collections" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Collections</Link>
+        <Link to="/collections" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Collections</Link>
         {user ? (
           <>
             <Link to="/account" className="mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>My Profile</Link>
