@@ -1,19 +1,16 @@
 .collections-page {
-  padding-bottom: 4rem;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  padding-bottom: 5rem;
 }
 
 .collections-hero {
   text-align: center;
-  padding: 4rem 1rem;
-  background-color: #050505;
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 3rem;
+  padding: 5rem 1rem 4rem;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 3.5rem;
 }
 
 .collections-heading {
-  font-size: 3rem;
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 800;
   letter-spacing: 0.1em;
   margin-bottom: 1rem;
@@ -29,40 +26,58 @@
 .collections-content {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 5rem;
 }
 
 .collection-section {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
+}
+
+.collection-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #000;
 }
 
 .collection-title {
-  font-size: 2rem;
-  font-weight: 700;
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.collection-count {
+  font-size: 0.85rem;
+  color: #888;
   letter-spacing: 0.05em;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--accent-color);
-  display: inline-block;
-  align-self: flex-start;
-  margin-bottom: 1rem;
 }
 
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2rem;
 }
 
 @media (max-width: 768px) {
   .collections-heading {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
-  
+
+  .collections-hero {
+    padding: 3rem 1rem;
+  }
+
   .collection-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+  }
+
+  .collections-content {
+    gap: 3rem;
   }
 }
 

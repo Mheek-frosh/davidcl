@@ -1,16 +1,22 @@
 .search-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 25vh;
-  background-color: var(--bg-color); /* Light theme */
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.search-overlay-inner {
+  position: relative;
+  background-color: var(--bg-color);
+  padding: 2rem 2rem 1.5rem;
   animation: slideDown 0.3s ease;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
 }
 
 @keyframes slideDown {
@@ -19,16 +25,17 @@
 }
 
 .search-overlay-content {
-  width: 100%;
-  max-width: 600px;
-  padding: 0 20px;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .search-container {
   display: flex;
   align-items: center;
+  gap: 12px;
   border-bottom: 2px solid var(--text-color);
-  padding-bottom: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 1rem;
 }
 
 .search-input {
@@ -36,13 +43,29 @@
   background: transparent;
   border: none;
   color: var(--text-color);
-  font-size: 24px;
+  font-size: 22px;
   outline: none;
   font-family: inherit;
+  letter-spacing: 0.03em;
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: #aaa;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.search-clear-btn:hover {
+  color: var(--text-color);
 }
 
 .search-icon-btn {
@@ -55,16 +78,76 @@
 
 .close-btn {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  top: 18px;
+  right: 24px;
   background: transparent;
   border: none;
   color: var(--text-color);
   cursor: pointer;
-  padding: 10px;
+  padding: 8px;
   transition: transform 0.3s ease;
 }
 
 .close-btn:hover {
   transform: rotate(90deg);
+}
+
+/* Search Results */
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-bottom: 0.5rem;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  opacity: 0.7;
+}
+
+.search-result-img {
+  width: 50px;
+  height: 60px;
+  object-fit: cover;
+  background: #f5f5f5;
+  flex-shrink: 0;
+}
+
+.search-result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.search-result-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.search-result-price {
+  font-size: 12px;
+  color: #888;
+}
+
+.search-no-results {
+  font-size: 14px;
+  color: #888;
+  padding: 1rem 0;
+  text-align: center;
 }

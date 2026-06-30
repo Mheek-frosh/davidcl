@@ -9,7 +9,7 @@ const Shop = () => {
         <h1 className="shop-heading">SHOP ALL</h1>
         <p className="shop-sub">Handcrafted. Limited. Yours.</p>
       </div>
-      <ProductGrid hideTitle={true} />
+      <ProductGrid hideTitle={true} showAll={true} />
     </div>
   );
 };

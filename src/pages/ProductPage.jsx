@@ -1,37 +1,27 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ProductView from '../components/ProductView/ProductView';
-
-const mockProducts = [
-  {
-    id: 1,
-    title: 'DP® MOTO JACKET',
-    price: '210.00',
-    image: 'https://cdn.shopify.com/s/files/1/0601/5906/6363/files/Artboard_1_75196a04-555e-4228-a1c1-ed961fc791f9.png?v=1780666154'
-  },
-  {
-    id: 2,
-    title: 'THRASHED DENIM',
-    price: '180.00',
-    image: 'https://cdn.shopify.com/s/files/1/0601/5906/6363/files/Artboard_4_f162e560-1947-40cf-b580-43c99595ea7c.png?v=1780666075'
-  },
-  {
-    id: 3,
-    title: 'NIGHTWALKER HOODIE',
-    price: '120.00',
-    image: 'https://cdn.shopify.com/s/files/1/0601/5906/6363/files/Untitled_design.zip_-_2.png?crop=center&height=1200&v=1755881481&width=1200'
-  },
-  {
-    id: 4,
-    title: 'SHADOW CARGO PANTS',
-    price: '150.00',
-    image: 'https://cdn.shopify.com/s/files/1/0601/5906/6363/files/Artboard_3_7f0d3bb8-bcdc-4306-9c9e-5c2fe503c967.png?v=1780666148'
-  }
-];
+import { getProductById } from '../data/products';
 
 const ProductPage = ({ addToCart }) => {
   const { id } = useParams();
-  const product = mockProducts.find(p => p.id === parseInt(id)) || mockProducts[0];
+  const navigate = useNavigate();
+  const product = getProductById(id);
+
+  if (!product) {
+    return (
+      <div style={{ textAlign: 'center', padding: '6rem 2rem' }}>
+        <h2 style={{ marginBottom: '1rem' }}>Product Not Found</h2>
+        <button
+          className="btn"
+          onClick={() => navigate('/')}
+          style={{ padding: '12px 32px' }}
+        >
+          Back to Home
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div>
